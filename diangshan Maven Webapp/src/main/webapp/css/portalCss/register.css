@@ -1,0 +1,90 @@
+
+*{
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+ul{
+	list-style: none;
+}
+input{
+	outline: 0;
+	border: 1px solid #999999;
+}
+body{
+	background-color: rgb(241,241,241);
+}
+.float_left{
+	float: left;
+}
+.float_right{
+	float: right;
+}
+.clear_both{
+	clear: both;
+}
+
+.header{
+	min-width: 1200px;
+	height: 50px;
+	background-color: #000000;
+}
+.header_login{
+	margin-left: 140px;
+} 
+.header_text{
+	font-size: 22px;
+	color: #FFFFFF;
+	padding-top: 10px;
+}
+.main{
+	width: 900px;
+	height: 520px;
+	padding-top: 20px;
+	margin: 50px auto;
+}
+.main_box{
+	width: 600px;
+	height: 300px;
+	margin: 40px auto;
+}
+.main_box h1{
+	text-align: center;
+}
+.main_box ul{
+	width: 320px;
+	margin: 30px auto;
+}
+.main_box ul li{
+	height: 50px;
+}
+.main_box ul li span{
+	display: block;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	float: left;
+}
+.main_box ul li input{
+	float: left;
+	width: 200px;
+	height: 30px;
+	padding: 0px 9px;
+}
+.lastli{
+	width: 320px;
+	margin: 10px auto;
+}
+.lastli input{
+	width: 100px;
+	height: 40px;
+	border-radius: 4px;
+	background-color: coral;
+	font-size: 18px;
+}
+.lastli span{
+	margin: 0px 48px;
+}
+.lastli input:hover{
+	background-color: red;
+}

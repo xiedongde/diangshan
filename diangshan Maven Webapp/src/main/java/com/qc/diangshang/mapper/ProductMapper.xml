@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qc.diangshang.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.qc.diangshang.pojo.Product" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="VARCHAR" />
+    <result column="site" property="site" jdbcType="VARCHAR" />
+    <result column="flavor" property="flavor" jdbcType="VARCHAR" />
+    <result column="product_integral" property="productIntegral" jdbcType="INTEGER" />
+    <result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="product_url" property="productUrl" jdbcType="VARCHAR" />
+    <result column="main_image" property="mainImage" jdbcType="VARCHAR" />
+    <result column="sub_images" property="subImages" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="freight" property="freight" jdbcType="INTEGER" />
+    <result column="view_count" property="viewCount" jdbcType="INTEGER" />
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <result column="sales_volume" property="salesVolume" jdbcType="INTEGER" />
+    <result column="hot_sale" property="hotSale" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, category_id, name, brand, weight, site, flavor, product_integral, subtitle, product_url, 
+    main_image, sub_images, price, freight, view_count, stock, sales_volume, hot_sale, 
+    status, create_time, update_time
+  </sql>
+  
+  
+  <!-- 查询所有商品 -->
+  <select id="findProductAll" resultMap="BaseResultMap" parameterType="map">
+  	select 
+    <include refid="Base_Column_List" />
+    from product 
+    <if test="productName != null" >
+    	where name like '%${productName}%'
+    </if>
+    <if test="pageSize != 0" >
+    LIMIT ${pageNum},${pageSize};
+    </if>
+  </select>
+  <!-- 总行数 -->
+  <select id="findProductCount" resultType="java.lang.Integer" parameterType="map">
+    select count(0)
+    from product 
+    <if test="productName != null" >
+    	where name like '%${productName}%'
+    </if>
+  </select>
+  <!-- 产品详情 -->
+  <select id="findProductDetails" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+      select 
+    <include refid="Base_Column_List" />
+    from product
+    where status=1 and id = ${id}
+  </select>
+  <!-- 商品下架 -->
+  <update id="updateProductStatus" parameterType="map">
+  	<if test="id !=0 and status !=0">
+  		UPDATE product SET `status`=${status} WHERE id=${id}
+  	</if>
+  </update>
+  
+  
+  
+ <!-- 添加产品信息 -->
+  <insert id="addProductAll" useGeneratedKeys="true" keyProperty="id" parameterType="com.qc.diangshang.pojo.Product" >
+    insert into product (id, category_id, name, 
+      subtitle, main_image,sub_images, 
+      price, stock, status, create_time)
+    values (#{id}, #{categoryId}, #{name}, 
+      #{subtitle}, #{mainImage},#{subImages}, 
+      #{price}, #{stock}, #{status}, SYSDATE())
+  </insert>
+  
+  
+  
+  <!-- 修改所有商品 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.qc.diangshang.pojo.Product" >
+    update product
+    <set >
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImage != null" >
+        main_image = #{mainImage,jdbcType=VARCHAR},
+      </if>
+      <if test="subImages != null" >
+        sub_images = #{subImages},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      SYSDATE()
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 17、产品搜索及动态排序List -->
+  <select id="findProductOrderBy" resultMap="BaseResultMap" parameterType="map">
+  	select 
+    <include refid="Base_Column_List" />
+    from product 
+    <if test="categoryId != null or keyword != null">
+    WHERE 
+    </if>
+    <if test="categoryId != null">
+    category_id=${categoryId} 
+    </if>
+    <if test="categoryId != null and keyword != null">
+    AND 
+    </if>
+    <if test="keyword != null">
+    `name` like '%${keyword}%' 
+    </if>
+    ORDER BY price 
+    <if test="priceDesc !=null">
+    DESC 
+    </if>
+    LIMIT ${pageNum},${pageSize};
+  </select>
+  
+  <!-- 18、产品detail -->
+  <select id="findByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where status=1 and id = ${id}
+  </select>
+  
+  <!-- 门户官网 -->
+  <!-- ******************** -->
+  <!-- 商品搜索 -->
+  <select id="findLikeName" resultMap="BaseResultMap" parameterType="map">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  	FROM product 
+  	<if test="likeName !=null">
+  	WHERE status=1 and `name` LIKE '%${likeName}%' OR subtitle LIKE '%${likeName}%';
+  	</if>
+  </select>
+  <!-- 新品 -->
+  <select id="findNewProduct" resultMap="BaseResultMap" parameterType="map">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  	FROM product WHERE create_time BETWEEN TIMESTAMPADD(day, ${dateDay}, CURDATE()) AND CURDATE() LIMIT 0,${indexSize};
+  </select>
+  <!-- 热卖商品 -->
+  <select id="findHotProduct" resultMap="BaseResultMap" parameterType="map">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  	FROM product WHERE status=1 and sales_volume>=${hotProduct} LIMIT 0,${indexSize}
+  </select>
+  <!-- 电子产品 -->
+  <select id="findElectronicProducts" resultMap="BaseResultMap" parameterType="map">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  	FROM product WHERE status=1 and category_id=${phone} OR category_id=${computer} LIMIT 0,${indexSize}
+  </select>
+  <!-- 时尚食品 -->
+  <select id="findClothingFood" resultMap="BaseResultMap" parameterType="map">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  	FROM product WHERE status=1 and category_id=${clothing} OR category_id=${food} LIMIT 0,${indexSize}
+  </select>
+  
+  
+  <!-- 分类也加载  -->
+  <!-- ******************** -->
+  <select id="findNewProductClass" resultMap="BaseResultMap" parameterType="map">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  		FROM product WHERE  status=1 and
+  	<if test="likeName !=null">
+  	`brand` LIKE '%${likeName}%' OR subtitle LIKE '%${likeName}%' and
+  	</if>
+  	<if test="maxPrice !=0 and minPrice !=0"><!-- 价格区间 -->
+  		price &gt;=${minPrice} and price &lt;= ${maxPrice} and
+  	</if>
+  	<if test="brand !=null"><!-- 品牌 -->
+  		brand LIKE '%${brand}%' and
+  	</if>
+  	<!-- |||  以下四个条件只能有一个不为null 所有没用 and  |||-->
+  	<if test="hotProduct !=0"><!-- 热卖 -->
+  		sales_volume>=${hotProduct} 
+  	</if>
+  	<if test="phone !=0 or computer !=0"><!-- 电子产品 -->
+  		category_id=${phone} OR category_id=${computer}
+  	</if>
+  	<if test="clothing !=0 or food !=0"><!-- 时尚食品 -->
+  		category_id=${clothing} OR category_id=${food} 
+  	</if>
+  	<if test="dateDay !=0"><!-- 新品-->
+		create_time BETWEEN TIMESTAMPADD(day, ${dateDay}, CURDATE()) AND CURDATE()
+  	</if>
+  	<!-- |||  以上四个条件只能有一个不为null 所有没用 and |||-->
+  	<!-- 新品类 -->
+  	<if test="orderByTime !=null"><!-- 时间排序 -->
+  		ORDER BY create_time 
+  	</if> 
+  	<if test="orderByTime !=null and jianTime !=null">
+  		DESC 
+  	</if>
+  	<if test="orderByPrice !=null"><!-- 价格排序 -->
+  		ORDER BY price
+  	</if>
+  	<if test="orderByPrice !=null and jianprice !=null">
+  		DESC
+  	</if>
+  	 	LIMIT ${indexPage},${indexSize}
+  </select>
+  <!-- ******************** -->
+  <!-- 分类也加载  总行数 -->
+  <select id="findNewProductCount" resultType="java.lang.Integer" parameterType="map">
+  	SELECT count(0)
+  		FROM product WHERE  status=1 and
+  	<if test="likeName !=null">
+  	`brand` LIKE '%${likeName}%' OR subtitle LIKE '%${likeName}%' and
+  	</if>
+  	<if test="maxPrice !=0 and minPrice !=0"><!-- 价格区间 -->
+  		price &gt;=${minPrice} and price &lt;= ${maxPrice} and
+  	</if>
+  	<if test="brand !=null"><!-- 品牌 -->
+  		brand LIKE '%${brand}%' and
+  	</if>
+  	<!-- |||  以下四个条件只能有一个不为null 所有没用 and  |||-->
+  	<if test="hotProduct !=0"><!-- 热卖 -->
+  		sales_volume>=${hotProduct} 
+  	</if>
+  	<if test="phone !=0 or computer !=0"><!-- 电子产品 -->
+  		category_id=${phone} OR category_id=${computer}
+  	</if>
+  	<if test="clothing !=0 or food !=0"><!-- 时尚食品 -->
+  		category_id=${clothing} OR category_id=${food} 
+  	</if>
+  	<if test="dateDay !=0"><!-- 新品-->
+		create_time BETWEEN TIMESTAMPADD(day, ${dateDay}, CURDATE()) AND CURDATE()
+  	</if>
+  	
+  </select>
+  
+  <!-- 热卖类 -->
+  <select id="findHotProductClass" resultMap="BaseResultMap" parameterType="map">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  		FROM product WHERE status=1 and 
+  	<if test="maxPrice !=null and minPrice !=null"><!-- 价格区间 -->
+  		price &gt;=${maxPrice} and price &lt;= ${minPrice} and
+  	</if>
+  	<if test="brand !=null"><!-- 品牌 -->
+  		brand =${brand} and 
+  	</if>
+  	
+  		sales_volume>=${hotProduct} 
+  		
+  	<if test="orderByTime !=null"><!-- 时间排序 -->
+  		ORDER BY create_time 
+  	</if> 
+  	<if test="orderByTime !=null and jianTime !=null">
+  		DESC 
+  	</if>
+  	<if test="orderByPrice !=null"><!-- 价格排序 -->
+  		ORDER BY price
+  	</if>
+  	<if test="orderByPrice !=null and jianprice !=null">
+  		DESC
+  	</if>
+  	LIMIT ${indexPage},${indexSize}
+  </select>
+  
+  <!-- 电子产品类 -->
+  <select id="findElectronicProductsClass" resultMap="BaseResultMap" parameterType="map">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  		FROM product WHERE status=1 and 
+  	<if test="maxPrice !=null and minPrice !=null"><!-- 价格区间 -->
+  		price &gt;=${maxPrice} and price &lt;= ${minPrice} and
+  	</if>
+  	<if test="brand !=null"><!-- 品牌 -->
+  		brand =${brand} and 
+  	</if>
+  	
+  		category_id=${phone} OR category_id=${computer}
+  		
+  	<if test="orderByTime !=null"><!-- 时间排序 -->
+  		ORDER BY create_time 
+  	</if> 
+  	<if test="orderByTime !=null and jianTime !=null">
+  		DESC 
+  	</if>
+  	<if test="orderByPrice !=null"><!-- 价格排序 -->
+  		ORDER BY price
+  	</if>
+  	<if test="orderByPrice !=null and jianprice !=null">
+  		DESC
+  	</if> 
+  	LIMIT ${indexPage},${indexSize}
+  </select>
+  
+  <!-- 时尚食品类 -->
+  <select id="findClothingFoodClass" resultMap="BaseResultMap" parameterType="map">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  	FROM product WHERE status=1 and 
+  	<if test="maxPrice !=null and minPrice !=null"><!-- 价格区间 -->
+  		price &gt;=${maxPrice} and price &lt;= ${minPrice} and
+  	</if>
+  	<if test="brand !=null"><!-- 品牌 -->
+  		brand =${brand} and 
+  	</if>
+  	
+  		category_id=${clothing} OR category_id=${food} 
+  		
+  	<if test="orderByTime !=null"><!-- 时间排序 -->
+  		ORDER BY create_time 
+  	</if> 
+  	<if test="orderByTime !=null and jianTime !=null">
+  		DESC 
+  	</if>
+  	<if test="orderByPrice !=null"><!-- 价格排序 -->
+  		ORDER BY price
+  	</if>
+  	<if test="orderByPrice !=null and jianprice !=null">
+  		DESC
+  	</if>
+  	LIMIT ${indexPage},${indexSize}
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qc.diangshang.pojo.Product" >
+    insert into product (id, category_id, name, 
+      brand, weight, site, 
+      flavor, product_integral, subtitle, 
+      product_url, main_image, sub_images, 
+      price, freight, view_count, 
+      stock, sales_volume, hot_sale, 
+      status, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, 
+      #{flavor,jdbcType=VARCHAR}, #{productIntegral,jdbcType=INTEGER}, #{subtitle,jdbcType=VARCHAR}, 
+      #{productUrl,jdbcType=VARCHAR}, #{mainImage,jdbcType=VARCHAR}, #{subImages,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{freight,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER}, 
+      #{stock,jdbcType=INTEGER}, #{salesVolume,jdbcType=INTEGER}, #{hotSale,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qc.diangshang.pojo.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="site != null" >
+        site,
+      </if>
+      <if test="flavor != null" >
+        flavor,
+      </if>
+      <if test="productIntegral != null" >
+        product_integral,
+      </if>
+      <if test="subtitle != null" >
+        subtitle,
+      </if>
+      <if test="productUrl != null" >
+        product_url,
+      </if>
+      <if test="mainImage != null" >
+        main_image,
+      </if>
+      <if test="subImages != null" >
+        sub_images,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="freight != null" >
+        freight,
+      </if>
+      <if test="viewCount != null" >
+        view_count,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="salesVolume != null" >
+        sales_volume,
+      </if>
+      <if test="hotSale != null" >
+        hot_sale,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null" >
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="flavor != null" >
+        #{flavor,jdbcType=VARCHAR},
+      </if>
+      <if test="productIntegral != null" >
+        #{productIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productUrl != null" >
+        #{productUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImage != null" >
+        #{mainImage,jdbcType=VARCHAR},
+      </if>
+      <if test="subImages != null" >
+        #{subImages,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="freight != null" >
+        #{freight,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null" >
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="salesVolume != null" >
+        #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="hotSale != null" >
+        #{hotSale,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelectives" parameterType="com.qc.diangshang.pojo.Product" >
+    update product
+    <set >
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null" >
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="flavor != null" >
+        flavor = #{flavor,jdbcType=VARCHAR},
+      </if>
+      <if test="productIntegral != null" >
+        product_integral = #{productIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="subtitle != null" >
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productUrl != null" >
+        product_url = #{productUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImage != null" >
+        main_image = #{mainImage,jdbcType=VARCHAR},
+      </if>
+      <if test="subImages != null" >
+        sub_images = #{subImages,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="freight != null" >
+        freight = #{freight,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null" >
+        view_count = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="salesVolume != null" >
+        sales_volume = #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="hotSale != null" >
+        hot_sale = #{hotSale,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qc.diangshang.pojo.Product" >
+    update product
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR},
+      flavor = #{flavor,jdbcType=VARCHAR},
+      product_integral = #{productIntegral,jdbcType=INTEGER},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      product_url = #{productUrl,jdbcType=VARCHAR},
+      main_image = #{mainImage,jdbcType=VARCHAR},
+      sub_images = #{subImages,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      freight = #{freight,jdbcType=INTEGER},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      stock = #{stock,jdbcType=INTEGER},
+      sales_volume = #{salesVolume,jdbcType=INTEGER},
+      hot_sale = #{hotSale,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

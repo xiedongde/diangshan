@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qc.diangshang.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.qc.diangshang.pojo.Comment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parent_num" property="parentNum" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="star" property="star" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parent_num, user_name, order_num, content, star, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qc.diangshang.pojo.Comment" >
+    insert into comment (id, parent_num, user_name, 
+      order_num, content, star, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{parentNum,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{star,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qc.diangshang.pojo.Comment" >
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parentNum != null" >
+        parent_num,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="star != null" >
+        star,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parentNum != null" >
+        #{parentNum,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="star != null" >
+        #{star,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qc.diangshang.pojo.Comment" >
+    update comment
+    <set >
+      <if test="parentNum != null" >
+        parent_num = #{parentNum,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="star != null" >
+        star = #{star,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qc.diangshang.pojo.Comment" >
+    update comment
+    set parent_num = #{parentNum,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      star = #{star,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

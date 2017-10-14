@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qc.diangshang.dao.BarnnerMapper" >
+  <resultMap id="BaseResultMap" type="com.qc.diangshang.pojo.Barnner" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="barnner_name" property="barnnerName" jdbcType="VARCHAR" />
+    <result column="barnner_url" property="barnnerUrl" jdbcType="VARCHAR" />
+    <result column="barnner_image" property="barnnerImage" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, barnner_name, barnner_url, barnner_image, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from barnner
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from barnner
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qc.diangshang.pojo.Barnner" >
+    insert into barnner (id, barnner_name, barnner_url, 
+      barnner_image, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{barnnerName,jdbcType=VARCHAR}, #{barnnerUrl,jdbcType=VARCHAR}, 
+      #{barnnerImage,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qc.diangshang.pojo.Barnner" >
+    insert into barnner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="barnnerName != null" >
+        barnner_name,
+      </if>
+      <if test="barnnerUrl != null" >
+        barnner_url,
+      </if>
+      <if test="barnnerImage != null" >
+        barnner_image,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="barnnerName != null" >
+        #{barnnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="barnnerUrl != null" >
+        #{barnnerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="barnnerImage != null" >
+        #{barnnerImage,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qc.diangshang.pojo.Barnner" >
+    update barnner
+    <set >
+      <if test="barnnerName != null" >
+        barnner_name = #{barnnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="barnnerUrl != null" >
+        barnner_url = #{barnnerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="barnnerImage != null" >
+        barnner_image = #{barnnerImage,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qc.diangshang.pojo.Barnner" >
+    update barnner
+    set barnner_name = #{barnnerName,jdbcType=VARCHAR},
+      barnner_url = #{barnnerUrl,jdbcType=VARCHAR},
+      barnner_image = #{barnnerImage,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

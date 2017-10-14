@@ -1,0 +1,179 @@
+
+.category{
+	min-width: 1200px;
+	height: 225px;
+	padding-top: 25px;
+}
+.category_box{
+	width: 1198px;
+	height: 198px;
+	margin: 0px auto;
+	border: 1px solid #999999;
+	background-color: #FFFFFF;
+}
+.brand,.order{
+	width: 1100px;
+	height: 50px;
+	font-size: 18px;
+	margin: 8px auto;
+}
+.brand{
+	margin-top: 28px;
+}
+.brand_box ul li{
+	margin: 0px 22px;
+}
+.brand span{
+	margin-left:34px;
+}
+.brand_box ul li a:hover{
+	color: crimson;
+}
+.brand_box ul li a{
+	color: #000000;
+}
+.order_box span{
+	margin: 0px 10px;
+	font-size: 18px;
+}
+.order_box li{
+	margin: 0px 10px;
+	font-size: 16px;
+}
+.order_box li a:hover{
+	color: crimson;
+}
+.order_box li a{
+	border: 1px solid #999999;
+	color: #000000;
+	font-size: 16px;
+}
+.order_box li input{
+	float: left;
+	width: 80px;
+	height: 25px;
+	border: 1px solid #999999;
+	margin-top: -2px;
+	padding: 0px 3px;
+}
+.order_box li .sub:hover{
+	background-color: crimson;
+}
+.order_box li .sub{
+	font-size: 18px;
+	background-color: burlywood;
+}
+.price{
+	margin-left: 140px;
+}
+
+.main{
+	width: 1180px;
+	height: 800px;
+	margin: 30px auto;
+}
+.main_box1{
+	width: 1187px;
+}
+.main_box1 img{
+	border: 1px solid #FFFFFF;
+}
+.main_box1 img:hover{
+	border-color: red;
+}
+.main_box2,.main_box3{
+	padding-left: 12px;
+}
+.main_box2 h2,.main_box3 h2{
+	margin: 15px 20px;
+	display: block;
+}
+.img_box{
+	display: block;
+	width: 220px;
+	height: 286px;
+	border: 2px solid rgb(245,245,245);
+	margin-left: 8px;
+	float: left;
+	margin-bottom: 10px;
+	background-color: #FFFFFF;
+}
+ .img_box:hover{
+ 	border-color: brown;
+ }
+ .img_box:hover p{
+ 	color: blue;
+ }
+.main_box2 img,.main_box3 img{
+	width: 134px;
+	height: 134px;
+	margin: 30px 40px 10px;
+}
+.text_box{
+	position:relative;
+	top: 5px;
+	text-align: center;
+}
+.text_box p{
+	color: #000000;
+}
+.text_box span{
+	font-size: 12px;
+	color: #999999;
+	margin: 0px 10px;
+}
+.text_box .span{
+	font-size: 24px;
+	color: red;
+}
+.gengduo{
+	display: block;
+	width: 100px;
+	height: 25px;
+	position: relative;
+	left: 1000px;
+	top: -30px;
+	color: #000000;
+}
+.gengduo:hover{
+	color: blue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

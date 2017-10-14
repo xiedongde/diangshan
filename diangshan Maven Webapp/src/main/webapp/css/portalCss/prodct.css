@@ -1,0 +1,190 @@
+.title {
+	min-width: 1200px;
+	height: 30px;
+}
+
+.title .i {
+	display: block;
+	width: 25px;
+	height: 25px;
+	background-image: url(../../img/portalImg/button/lasone.png);
+	background-size: 15px;
+	background-repeat: no-repeat;
+	margin-top: 7px;
+	margin-left: 8px;
+	float: left;
+}
+
+.title span {
+	display: block;
+	height: 30px;
+	color: #000000;
+	font-size: 12px;
+	line-height: 30px;
+	margin-left: 40px;
+	float: left;
+}
+
+.mian {
+	width: 1180px;
+	height: 800px;
+	border: 1px solid #555555;
+	margin: 0px auto;
+	clear: both;
+}
+
+.mian_right {
+	width: 650px;
+	height: 800px;
+	border-left: 1px solid #000;
+}
+
+.mian_right_top_box {
+	width: 620px;
+	border-bottom: 1px solid #000;
+	padding-left: 30px;
+	height: 110px;
+	overflow: hidden;
+	clear: both;
+}
+
+.mian_right_top h2 {
+	font-size: 20px;
+	margin-top: 30px;
+}
+
+.mian_right_top span {
+	color: brown;
+}
+
+.mian_right_mian {
+	width: 620px;
+	padding-left: 30px;
+	padding-top: 10px;
+	height: 200px;
+	border-bottom: 1px solid #000;
+}
+
+.mian_right_mian .jiage{
+	font-size: 18px;
+	color: red;
+}
+.mian_right_mian span {
+	font-size: 12px;
+}
+
+.mian_right_mian ul li {
+	height: 32px;
+}
+
+.mian_right_bot {
+	width: 650px;
+	padding-left: 30px;
+	height: 460px;
+	font-size: 12px;
+}
+
+.mian_right_bot ul li .span {
+	margin-top: 18px;
+	float: left;
+}
+
+.mian_right_bot ul li span {
+	margin-top: 5px;
+}
+
+.sku {
+	margin-left: 5px;
+}
+
+.mian_right_bot ul li .sku_box {
+	margin-left: 5px;
+	float: left;
+	padding: 5px 10px;
+	border: 1px solid firebrick;
+}
+
+.mian_right_bot ul li {
+	clear: both;
+	padding: 8px 0px;
+}
+
+.mian_right_bot ul li .span_box {
+	float: left;
+	text-align: center;
+	line-height: 28px;
+	display: block;
+	width: 28px;
+	height: 28px;
+	border: 1px solid #999999;
+	background-color: #FFFFFF;
+}
+
+.mian_right_bot ul li input {
+	float: left;
+	width: 58px;
+	height: 28px;
+	text-align: center;
+	border: 1px solid #999999;
+	margin: 5px;
+	background-color: #FFFFFF;
+}
+
+.but_box {
+	height: 60px;
+	padding-top: 60px;
+}
+
+.but_box span {
+	display:block;
+	width: 130px;
+	font-size: 18px;
+	padding: 10px 30px;
+	color: #FFF;
+	background-color: rgb(224, 29, 32);
+	float: left;
+}
+
+.but_box span i {
+	display: block;
+	width: 26px;
+	height: 26px;
+	background-image: url(../../img/portalImg/button/addcart.png);
+	background-size: 26px;
+	background-repeat: no-repeat;
+	float: left;
+	margin-right: 8px;
+}
+
+.but_box input {
+	font-size: 18px;
+	padding: 11px 60px;
+	color: #FFF;
+	margin-left: 50px;
+	background-color: rgb(255, 92, 20);
+}
+
+
+.main_left .list {
+	padding: 0 10px;
+}
+
+.list img {
+	cursor: pointer;
+	padding: 1px;
+	border: 1px solid #cdcdcd;
+	margin-bottom: 10px;
+	display: block;
+}
+.bottom{
+	width: 1180px;
+	border: 1px solid #555555;
+	margin: 0px auto;
+}
+.bottom h1{
+	text-align: center;
+}
+.bottom_box{
+	width: 750px;
+	margin: 20px auto;
+}

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qc.diangshang.dao.ProductImgMapper" >
+  <resultMap id="BaseResultMap" type="com.qc.diangshang.pojo.ProductImg" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="min_img" property="minImg" jdbcType="VARCHAR" />
+    <result column="max_img" property="maxImg" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="barnner" property="barnner" jdbcType="VARCHAR" />
+    <result column="barnner_url" property="barnnerUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, product_id, min_img,max_img, detail, barnner, barnner_url, status, create_time, update_time
+  </sql>
+  
+  
+  <!-- 添加图片 -->
+  <insert id="addSelective" parameterType="java.util.List">
+	insert into product_img
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+			product_id,
+			min_img,
+			detail,
+			status,
+			create_time,
+	</trim>
+	values
+	<foreach collection="list" item="r" separator=",">
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{r.productId},
+				#{r.minImg},
+				#{r.detail},
+				1,
+				SYSDATE()
+		</trim>
+	</foreach>
+</insert>
+  
+  <!-- 查询产品图片 -->
+  <select id="findProductImgAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_img
+    where product_id = ${productId}
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_img
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qc.diangshang.pojo.ProductImg" >
+    insert into product_img (id, product_id, min_img, 
+      detail, barnner, barnner_url, 
+      status, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{minImg,jdbcType=VARCHAR}, 
+      #{detail,jdbcType=VARCHAR}, #{barnner,jdbcType=VARCHAR}, #{barnnerUrl,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qc.diangshang.pojo.ProductImg" >
+    insert into product_img
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="minImg != null" >
+        min_img,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="barnner != null" >
+        barnner,
+      </if>
+      <if test="barnnerUrl != null" >
+        barnner_url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="minImg != null" >
+        #{minImg,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="barnner != null" >
+        #{barnner,jdbcType=VARCHAR},
+      </if>
+      <if test="barnnerUrl != null" >
+        #{barnnerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qc.diangshang.pojo.ProductImg" >
+    update product_img
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="minImg != null" >
+        min_img = #{minImg,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="barnner != null" >
+        barnner = #{barnner,jdbcType=VARCHAR},
+      </if>
+      <if test="barnnerUrl != null" >
+        barnner_url = #{barnnerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qc.diangshang.pojo.ProductImg" >
+    update product_img
+    set product_id = #{productId,jdbcType=INTEGER},
+      min_img = #{minImg,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      barnner = #{barnner,jdbcType=VARCHAR},
+      barnner_url = #{barnnerUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

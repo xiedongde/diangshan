@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qc.diangshang.dao.CartMapper" >
+  <resultMap id="BaseResultMap" type="com.qc.diangshang.pojo.Cart" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_img" property="productImg" jdbcType="VARCHAR" />
+    <result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="flavor" property="flavor" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="product_integral" property="productIntegral" jdbcType="INTEGER" />
+    <result column="freight" property="freight" jdbcType="INTEGER" />
+    <result column="checked" property="checked" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, product_id,product_img,subtitle,flavor, quantity,price,product_integral,freight
+     checked, create_time, update_time
+  </sql>
+  
+  <!-- 添加购物车商品 -->
+  <insert id="addProdctAll" parameterType="com.qc.diangshang.pojo.Cart" >
+    insert into cart (user_id, product_id,product_img,subtitle,flavor, quantity,price,product_integral,freight, checked, create_time)
+    values (${userId}, ${productId},#{productImg},#{subtitle},#{flavor},${quantity},${price},${productIntegral},${freight}, ${checked}, SYSDATE())
+  </insert>
+  
+  <!-- 删除购物车商品 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cart
+    where id = ${cartId}
+  </delete>
+  <!-- 根据用户名和商品id查询购物车 -->
+  <select id="findByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where product_id = ${productId} and user_id=${userId}
+  </select>
+  <!-- 根据id查询购物车 -->
+  <select id="findCart" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where id = ${cartId}
+  </select>
+  <!-- 修改购物车商品数量 -->
+  <update id="updateQuantity" parameterType="map">
+	UPDATE cart SET quantity = ${quantity} WHERE product_id=${productId} and user_id=${userId}
+  </update>
+  
+  <!-- 查询当前用户所有购物车商品 -->
+  <select id="findCartAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where user_id=${userId}
+  </select>
+  <!-- 查询当前用户所有被选中购物车商品 -->
+  <select id="findCartCheckedAll" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where  checked=${checked} and user_id=${userId}
+  </select>
+  
+  <!-- 修改是否被选中 -->
+  <update id="updateChecked" parameterType="map">
+	UPDATE cart SET checked = ${checked} WHERE id = ${cartId}
+  </update>
+  
+  
+  
+  
+  
+  <insert id="insertSelective" parameterType="com.qc.diangshang.pojo.Cart" >
+    insert into cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="checked != null" >
+        checked,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="checked != null" >
+        #{checked,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qc.diangshang.pojo.Cart" >
+    update cart
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="checked != null" >
+        checked = #{checked,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qc.diangshang.pojo.Cart" >
+    update cart
+    set user_id = #{userId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      checked = #{checked,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

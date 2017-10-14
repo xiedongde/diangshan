@@ -1,0 +1,248 @@
+.cart{
+	min-width: 1200px;
+	margin-bottom: 20px;
+}
+.cart_box{
+	width: 1180px;
+	margin: 0px auto;
+	margin-top: 10px;
+}
+.cart_header{
+	width: 1180px;
+	height: 60px;
+	border-bottom: 2px solid #999999;
+}
+.cart_header span{
+	margin-top: 10px;
+}
+.chakan,.tijiao,.chenggong{
+	width: 130px;
+	height: 50px;
+	margin: 0px 20px;
+	text-align: center;
+	line-height: 50px;
+	background-color: darkkhaki;
+	border-radius:45px ;
+}
+.chakan{
+	margin-left: 640px;
+}
+.tijiao{
+	background-color: darkcyan;
+}
+
+.order{
+	min-width: 1200px;
+}
+.order h3{
+	margin-left: 10px;
+}
+.shipping_box,.zifu,.cart_product{
+	width: 1180px;
+	margin: 0px auto;
+	padding:20px 0px;
+	border-left: 2px dashed #999999;
+	border-right: 2px dashed #999999;
+	background-color: #FFFFFF;
+}
+.shipping_box h3{
+	margin-bottom: 20px;
+}
+.shipping_box .shipping_form ul{
+	width: 780px;
+	margin: 0px auto;
+	padding: 40px 80px;
+	border: 1px solid #999999;
+	background-color: cornsilk;
+}
+.shipping_form ul li{
+	height: 40px;
+	margin: 5px 0px;
+}
+.shipping_form ul li span{
+	display: block;
+	height: 40px;
+	width: 120px;
+	line-height: 32px;
+	text-align: center;
+	font-size: 16px;
+	float: left;
+}
+.shipping_form input{
+	border: 1px solid #999999;
+	float: left;
+	height: 32px;
+	padding: 0px 10px;
+}
+.shipping_form ul .li1 input{
+	width: 200px;
+}
+.shipping_form ul .li2 select{
+	height: 32px;
+	border: 1px solid #999999;
+}
+.shipping_form ul .li3 input{
+	width: 500px;
+}
+.shipping_form ul .li4 .or{
+	width: 0px;
+	padding: 0px 20px;
+}
+.shipping_form ul .li4 input{
+	width: 200px;
+}
+.shipping_form ul .li5 input{
+	width: 200px;
+}
+.shipping_form ul .li6{
+	height: 50px;
+	margin-top: 20px;
+}
+.shipping_form ul .li6 input{
+	width: 150px;
+	height: 50px;
+	border-radius: 5px;
+	background-color: coral;
+	margin-left: 200px;
+	font-size: 16px;
+}
+
+.receiver_shipping{
+	padding: 10px;
+}
+.receiver_box{
+	width: 300px;
+	height: 200px;
+	border: 4px dashed #92B8B1;
+	overflow: hidden;
+	padding: 20px 40px;
+	background-color: lightgoldenrodyellow;
+}
+.receiver_box ul li {
+	height: 25px;
+}
+.receiver_box span{
+	display: block;
+	width: 100px;
+	height: 25px;
+	float: left;
+}
+.receiver_box ul li .clear{
+	width: 260px;
+	height: 83px;
+	padding-left: 10px;
+	margin: 0px auto;
+	overflow: hidden;
+}
+
+.pay_box{
+	width: 1000px;
+	height: 50px;
+	margin: 20px auto;
+	padding: 20px 20px;
+	border: 1px solid #999999;
+	background-color: ivory;
+}
+.pay_box span{
+	display: block;
+	width: 150px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+.pay_box .zfb{
+	margin-top: 5px;
+}
+.pay_box .zfb input{
+	margin-top:14px ;
+}
+.pay_box .zfb img{
+	border: 1px solid #999999;
+}
+
+
+.cart_product_box .had b{
+	margin-left: 10px;
+	font-size: 20px;
+}
+.cart_product_box .had a{
+	margin-left: 900px;
+}
+
+.cart_product_box table{
+	width: 1100px;
+	margin: 10px auto;
+	border: 1px solid #999999;
+	text-align: center;
+}
+.cart_product_box table tr{
+	height: 50px;
+}
+.cart_product_box table .tr{
+	border: 1px solid #999999;
+}
+.cart_product_box table th{
+	background-color: darkseagreen;
+}
+.cart_product_box table td{
+	background-color: ivory;
+	border-bottom: 1px dashed #999999;
+	padding: 5px 0px;
+}
+.cart_product_box table .th1{
+	width: 280px;
+}
+.cart_product_box table .th2{
+	width: 120px;
+}
+.cart_product_box table .td1{
+	width: 120px;
+}
+.cart_product_box table .td1 img{
+	width: 100px;
+	height: 100px;
+}
+.cart_product_box table .td2{
+	padding-right: 20px;
+	width: 380px;
+	text-align: left;
+}
+
+.ddtijiao{
+	height: 50px;
+	padding: 20px 0px;
+	background-color: gainsboro;
+	border-bottom: 1px dotted #999999;
+	margin: 20px auto;
+}
+.tijiao_box{
+	width: 600px;
+	float: right;
+}
+.tijiao_box div{
+	width: 180px;
+	float: left;
+	text-align: center;
+}
+.jifen,.jiner{
+	padding-top: 10px;
+}
+.tijiao_box .sub input{
+	width: 150px;
+	height: 50px;
+	background-color: coral;
+	font-size: 18px;
+	color: #FFFFFF;
+	border-radius:5px ;
+	float: right;
+}
+.tijiao_box .sub input:hover{
+	background-color: orangered;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="diangshan Maven Webapp"
+  id="myeclipse.1501163463426"
+  context-root="/diangshan"
+  j2ee-spec="6.0"
+  archive="diangshan Maven Webapp.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,345 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+a{
+	text-decoration: none;
+}
+ul{
+	list-style:none;
+}
+body{
+	min-width: 1200px;
+	background-color: rgb(245,245,245);
+}
+input{
+	outline: 0;
+	background-color: #FFFFFF;
+}
+.float_left{
+	float: left;
+}
+.float_right{
+	float: right;
+}
+.clear_both{
+	clear: both;
+}
+.header{
+	min-width: 1200px;
+	height: 30px;
+	border-bottom: 1px solid #999999;
+	background-color: lavender;
+}
+.header li{
+	float: left;
+	font-size: 12px;
+	color: #999;
+	line-height: 30px;
+}
+.header .li{
+	margin: 0px 5px;
+}
+.header .li1{
+	margin-left: 10px;
+	color: #000;
+}
+.header .li1 span{
+	color: #000;
+}
+.header a{
+	font-size: 12px;
+	color: #999;
+}
+.header a:hover{
+	color: firebrick;
+}
+.header_seek {
+	min-width: 1200px;
+	height: 100px;
+	background-color: #FFFFFF;
+}
+.header_seek .logo{
+	width: 400px;
+	height: 100px;
+}
+.header_seek .logo img{
+	margin: 0px 0px 0px 15px;
+}
+.header_seek .seek_box{
+	width: 398px;
+	height: 38px;
+	border: 1px solid #999;
+	margin-top: 30px;
+}
+ .seek_box .seek_text{
+ 	width: 340px;
+ 	height: 25px;
+ 	margin-top: 7px;
+ 	padding: 0px 10px;
+ }
+ .seek_box button{
+ 	background-color: #fff;
+ 	width: 38px;
+ 	height: 38px;
+ 	border-left: 1px solid #999999;
+ 	background-image: url(../../img/portalImg/button/seek.png);
+ 	background-repeat: no-repeat;
+ 	background-position: 5px;
+ 	background-size: 25px;
+ }
+ .seek_box button:hover{
+ 	background-color: #555;
+ 	width: 38px;
+ 	height: 38px;
+ 	background-image: url(../../img/portalImg/button/seeks.png);
+ 	background-repeat: no-repeat;
+ 	background-position: 5px;
+ 	background-size: 25px;
+ }
+ .shopping_cart{
+ 	width: 420px;
+ }
+.shoppingcart{
+	float: left;
+	width: 198px;
+	height: 38px;
+	border: 1px solid #999;
+	margin-top: 30px;
+}
+.shoppingcart ul{
+	margin-left: 20px;
+	line-height: 38px;
+}
+.shoppingcart li{
+	float: left;
+	font-size: 12px;
+	color: #000;
+}
+.shoppingcart .li1{
+	width: 70px;
+}
+.shoppingcart .li2:hover .li2_div2{
+	display: block;
+}
+.shoppingcart .li2 .li2_div2{
+	position: relative;
+	left: 55px;
+	top: -60px;
+	display: none;
+}
+.li2_div2 #cart{
+	display: block;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #999;
+	border-radius: 50%;
+	background-color: rosybrown;
+	font-size: 14px;
+	text-align: center;
+	line-height: 30px;
+	color: #FFFFFF;
+}
+.shoppingcart .li1:hover .shopping_box{
+	display: block;
+	z-index: 99;
+}
+.shoppingcart li:hover .i{
+	background-image: url(../../img/portalImg/button/xiala2.png);
+}
+.shoppingcart .li{
+	color: #999;
+	margin: 0px 5px;
+}
+.shoppingcart .i{
+	float: left;
+	margin-top: 10px;
+	display: block;
+	width: 20px;
+	height: 20px;
+	background-image: url(../../img/portalImg/button/xiala1.png);
+ 	background-repeat: no-repeat;
+ 	background-position: 3px;
+ 	background-size: 15px;
+}
+.shoppingcart a{
+	color: #000000;
+}
+.shoppingcart a:hover{
+	color: firebrick;
+	text-decoration: underline;
+}
+.shopping_box{
+	position: relative;
+	background-color: #fff;
+	top: 38px;
+	left: -21px;
+	width: 198px;
+	height: 200px;
+	border: 1px solid #999999;
+	display: none;
+}
+.shopping_box_1{
+	width: 198px;
+	height: 39px;
+	border-bottom: 1px solid #999999;
+}
+.shopping_box li{
+	width: 198px;
+	height: 40px;
+}
+.shopping_box ul li span{
+	float: left;
+}
+.shopping_box ul li a{
+	display: block;
+	width: 56px;
+	height: 20px;
+	float: left;
+	align-content: center;
+	margin: 0px 10px;
+	text-align: center;
+}
+.nva{
+	min-width: 1200px;
+	height: 40px;
+	background-color: rgb(58,58,58);
+}
+.nva .nva_left{
+	width: 230px;
+	height: 40px;
+	margin-left: 40px;
+	background-color: brown;
+}
+.nva .nva_left span{
+	float: left;
+	color: #FFFFFF;
+	font-size: 14px;
+	margin-left:20px;
+	line-height: 40px;
+}
+.nva .nva_left .i{
+	float: right;
+	display: block;
+	width: 25px;
+	height: 25px;
+	margin-top: 12px;
+	background-image: url(../../img/portalImg/button/tab_la.png);
+	background-repeat: no-repeat;
+	background-size: 13px;
+}
+.nva .nva_left:hover .i{
+	background-image: url(../../img/portalImg/button/tab_shou.png);
+}
+.nva .nva_left:hover .nva_box{
+	display: block;
+}
+.nva_box{
+	width: 230px;
+	height: 400px;
+	z-index: 99;
+	opacity: 0.9;
+	background-color: rgb(76,76,76);
+	position: relative;
+	display:none;
+	clear: both;
+}
+.nva_box li{
+	height: 50px;
+	line-height:50px;
+	padding: 10px 0px;
+}
+.nva_box_a .a{
+	color: #fff;
+	font-size: 14px;
+	margin-top: 10px;
+	margin-left:20px;
+}
+.nva_box_b{
+	margin-top: 5px;
+}
+.nva_box_b .a1{
+	color: #999;
+	font-size: 14px;
+	margin-left: 20px;
+}
+.nva_box_b .a2{
+	color: #999;
+	font-size: 14px;
+	margin-left: 5px;
+}
+.nva_box li:hover{
+	background-color: rgb(61,61,61);
+}
+.nva_right{
+	height: 40px;
+}
+.nva_right ul li{
+	float: left;
+}
+.nva_right ul li:hover{
+	background-color: #000000;
+}
+.nva_right a{
+	color: #FFFFFF;
+	font-size: 14px;
+	display: block;
+	height: 40px;
+	padding: 0px 30px;
+	line-height: 40px;
+}
+.nva_box_c1{
+	position: relative;
+	top: -55px;
+	left: 230px;
+	width: 500px;
+	height: 400px;
+	opacity: 1;
+	background-color: rgb(247,247,247);
+	display: none;
+}
+.nva_box_c1 ul{
+	padding-top: 15px;
+}
+.nva_box_c1 ul li{
+	width:150px;
+	height:35px;
+	line-height:35px;
+	padding: 0px 20px;
+	margin: 15px 0px;
+}
+.nva_box_c1 ul li a{
+	color: #000000;
+	font-size:16px ;
+}
+.nva_box_c1 ul li:hover{
+	background-color: rgb(238,238,238);
+}
+.nva_box_c1 ul li:hover a{
+	color: firebrick;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

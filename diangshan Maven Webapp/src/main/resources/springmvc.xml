@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 2、注解扫描包；控制器（Controller）和业务逻辑层（Services）的包路径 -->
+	<context:component-scan base-package="com.qc.diangshang.controller" />
+	<context:component-scan base-package="com.qc.diangshang.services" />
+
+	<!-- 3、添加注解 -->
+	<mvc:default-servlet-handler />
+	<mvc:annotation-driven />
+
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+</beans>
